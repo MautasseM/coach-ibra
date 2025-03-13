@@ -1,3 +1,20 @@
+/* Exemple de style pour la page de profil */
+.container {
+    max-width: 800px;
+}
+
+h1 {
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.alert {
+    margin-top: 20px;
+}
+
 body {
-    background-color: skyblue;
+    background-color: rgb(191, 154, 201);
 }

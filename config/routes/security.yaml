@@ -1,3 +1,19 @@
-_security_logout:
-    resource: security.route_loader.logout
-    type: service
+app_login:
+    path: /login
+    controller: App\Controller\LoginController::index
+
+app_logout:
+    path: /logout
+    controller: App\Controller\LoginController::logout
+
+app_register: # Assurez-vous d'avoir une route pour l'inscription
+    path: /register
+    # ... votre contrôleur et action pour l'inscription
+
+app_forgot_password_request: # Assurez-vous d'avoir une route pour la demande de mot de passe oublié
+    path: /forgot-password
+    # ... votre contrôleur et action pour la demande de mot de passe oublié
+
+app_home:
+    path: /
+    controller: App\Controller\HomeController::index # Replace with your actual homepage controller

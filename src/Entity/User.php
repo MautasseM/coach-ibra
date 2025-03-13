@@ -3,7 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -20,6 +21,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $firstName = null;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $lastName = null;
+
+    #[ORM\Column(type: 'string', length: 15, nullable: true)]
+    private ?string $phone = null;
+
     /**
      * @var list<string> The user roles
      */
@@ -32,20 +42,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $firstName = null;
+    /**
+     * @var Collection<int, Booking>
+     */
+    #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'User')]
+    private Collection $bookings;
 
-    #[ORM\Column(length: 255)]
-    private ?string $lastName = null;
+    /**
+     * @var Collection<int, Subscription>
+     */
+    #[ORM\OneToMany(targetEntity: Subscription::class, mappedBy: 'user')]
+    private Collection $subscriptions;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $phone = null;
+    /**
+     * @var Collection<int, BlogPost>
+     */
+    #[ORM\OneToMany(targetEntity: BlogPost::class, mappedBy: 'author')]
+    private Collection $blogPosts;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
-
-    #[ORM\Column]
-    private ?bool $isVerified = null;
+    public function __construct()
+    {
+        $this->bookings = new ArrayCollection();
+        $this->subscriptions = new ArrayCollection();
+        $this->blogPosts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +80,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): static
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): static
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): static
+    {
+        $this->phone = $phone;
 
         return $this;
     }
@@ -122,62 +178,92 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getFirstName(): ?string
+    /**
+     * @return Collection<int, Booking>
+     */
+    public function getBookings(): Collection
     {
-        return $this->firstName;
+        return $this->bookings;
     }
 
-    public function setFirstName(string $firstName): static
+    public function addBooking(Booking $booking): static
     {
-        $this->firstName = $firstName;
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings->add($booking);
+            $booking->setUser($this);
+        }
 
         return $this;
     }
 
-    public function getLastName(): ?string
+    public function removeBooking(Booking $booking): static
     {
-        return $this->lastName;
-    }
-
-    public function setLastName(string $lastName): static
-    {
-        $this->lastName = $lastName;
+        if ($this->bookings->removeElement($booking)) {
+            // set the owning side to null (unless already changed)
+            if ($booking->getUser() === $this) {
+                $booking->setUser(null);
+            }
+        }
 
         return $this;
     }
 
-    public function getPhone(): ?string
+    /**
+     * @return Collection<int, Subscription>
+     */
+    public function getSubscriptions(): Collection
     {
-        return $this->phone;
+        return $this->subscriptions;
     }
 
-    public function setPhone(?string $phone): static
+    public function addSubscription(Subscription $subscription): static
     {
-        $this->phone = $phone;
+        if (!$this->subscriptions->contains($subscription)) {
+            $this->subscriptions->add($subscription);
+            $subscription->setUser($this);
+        }
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function removeSubscription(Subscription $subscription): static
     {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
-    {
-        $this->createdAt = $createdAt;
+        if ($this->subscriptions->removeElement($subscription)) {
+            // set the owning side to null (unless already changed)
+            if ($subscription->getUser() === $this) {
+                $subscription->setUser(null);
+            }
+        }
 
         return $this;
     }
 
-    public function isVerified(): ?bool
+    /**
+     * @return Collection<int, BlogPost>
+     */
+    public function getBlogPosts(): Collection
     {
-        return $this->isVerified;
+        return $this->blogPosts;
     }
 
-    public function setIsVerified(bool $isVerified): static
+    public function addBlogPost(BlogPost $blogPost): static
     {
-        $this->isVerified = $isVerified;
+        if (!$this->blogPosts->contains($blogPost)) {
+            $this->blogPosts->add($blogPost);
+            $blogPost->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBlogPost(BlogPost $blogPost): static
+    {
+        if ($this->blogPosts->removeElement($blogPost)) {
+            // set the owning side to null (unless already changed)
+            if ($blogPost->getAuthor() === $this) {
+                $blogPost->setAuthor(null);
+            }
+        }
 
         return $this;
     }
