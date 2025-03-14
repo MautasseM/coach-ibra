@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BlogPostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,6 +36,20 @@ class BlogPost
 
     #[ORM\ManyToOne(inversedBy: 'blogPosts')]
     private ?User $author = null;
+
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'blogPosts')]
+    private ?self $blogPost = null;
+
+    /**
+     * @var Collection<int, self>
+     */
+    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'blogPost')]
+    private Collection $blogPosts;
+
+    public function __construct()
+    {
+        $this->blogPosts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +136,48 @@ class BlogPost
     public function setAuthor(?User $author): static
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getBlogPost(): ?self
+    {
+        return $this->blogPost;
+    }
+
+    public function setBlogPost(?self $blogPost): static
+    {
+        $this->blogPost = $blogPost;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getBlogPosts(): Collection
+    {
+        return $this->blogPosts;
+    }
+
+    public function addBlogPost(self $blogPost): static
+    {
+        if (!$this->blogPosts->contains($blogPost)) {
+            $this->blogPosts->add($blogPost);
+            $blogPost->setBlogPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBlogPost(self $blogPost): static
+    {
+        if ($this->blogPosts->removeElement($blogPost)) {
+            // set the owning side to null (unless already changed)
+            if ($blogPost->getBlogPost() === $this) {
+                $blogPost->setBlogPost(null);
+            }
+        }
 
         return $this;
     }
