@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Exemple de style pour la page de profil */
 .container {
     max-width: 800px;

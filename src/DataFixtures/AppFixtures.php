@@ -86,8 +86,8 @@ class AppFixtures extends Fixture
                 $schedule = new Schedule();
                 $schedule->setService($service)
                     ->setDayOfWeek($faker->numberBetween(1, 7))
-                    ->setStartTime($faker->time('H:i:s'))
-                    ->setEndTime($faker->time('H:i:s'))
+                    ->setStartTime(\DateTimeImmutable::createFromFormat('H:i:s', $faker->time('H:i:s')))
+                    ->setEndTime(\DateTimeImmutable::createFromFormat('H:i:s', $faker->time('H:i:s')))
                     ->setLocation($faker->randomElement($locations))
                     ->setIsActive($faker->boolean(90));
 
@@ -102,9 +102,9 @@ class AppFixtures extends Fixture
                 $booking = new Booking();
                 $booking->setUser($user)
                     ->setSchedule($faker->randomElement($schedules))
-                    ->setDate($faker->dateTimeBetween('-1 months', '+1 months'))
+                    ->setDate(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 months', '+1 months')))
                     ->setStatus($faker->randomElement(['pending', 'confirmed', 'cancelled']))
-                    ->setCreatedAt($faker->dateTimeThisYear);
+                    ->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeThisYear));
 
                 $manager->persist($booking);
             }
@@ -130,8 +130,8 @@ class AppFixtures extends Fixture
             $subscription = new Subscription();
             $subscription->setUser($user)
                 ->setPlan($faker->randomElement($plans))
-                ->setStartDate($faker->dateTimeBetween('-6 months', 'now'))
-                ->setEndDate($faker->dateTimeBetween('now', '+6 months'))
+                ->setStartDate(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-6 months', 'now')))
+                ->setEndDate(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('now', '+6 months')))
                 ->setStatus($faker->randomElement(['active', 'expired', 'cancelled']))
                 ->setPaymentStatus($faker->randomElement(['paid', 'pending', 'failed']));
 
@@ -146,7 +146,7 @@ class AppFixtures extends Fixture
                 ->setContent($faker->paragraphs(3, true))
                 ->setImage($faker->imageUrl())
                 ->setAuthor($faker->randomElement($users))
-                ->setCreatedAt($faker->dateTimeThisYear)
+                ->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeThisYear))
                 ->setIsPublished($faker->boolean(80));
 
             $manager->persist($blogPost);
@@ -159,7 +159,7 @@ class AppFixtures extends Fixture
                 ->setContent($faker->paragraph)
                 ->setRating($faker->numberBetween(1, 5))
                 ->setIsApproved($faker->boolean(90))
-                ->setCreatedAt($faker->dateTimeThisYear);
+                ->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeThisYear));
 
             $manager->persist($testimonial);
         }

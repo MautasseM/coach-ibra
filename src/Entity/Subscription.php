@@ -29,6 +29,9 @@ class Subscription
     #[ORM\ManyToOne(inversedBy: 'subscriptions')]
     private ?User $user = null;
 
+    #[ORM\ManyToOne(targetEntity: SubscriptionPlan::class)]
+    private ?SubscriptionPlan $plan = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,6 +94,17 @@ class Subscription
     {
         $this->user = $user;
 
+        return $this;
+    }
+
+    public function getPlan(): ?SubscriptionPlan
+    {
+        return $this->plan;
+    }
+
+    public function setPlan(?SubscriptionPlan $plan): static
+    {
+        $this->plan = $plan;
         return $this;
     }
 }
