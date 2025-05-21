@@ -8,6 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ajgl/doctrine-dbal-pgsql-types": "^0.4.1",
+        "api-platform/core": "*",
         "api-platform/doctrine-orm": "*",
         "api-platform/symfony": "*",
         "doctrine/dbal": "^3",

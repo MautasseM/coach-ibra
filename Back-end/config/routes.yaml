@@ -10,3 +10,7 @@ frontend:
     controller: App\\Controller\\HomeController::serveReactApp
     requirements:
         reactRouting: (?!api).*
+api:
+    resource: '../src/Controller/Api/'
+    type: attribute
+    prefix: /api

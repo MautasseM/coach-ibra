@@ -1,0 +1,11 @@
+{
+    "require-dev": {
+        "symfony/test-pack": "^1.1",
+        "symfony/http-client": "^7.2",
+        "phpunit/phpunit": "^9.6",
+        "symfony/phpunit-bridge": "^7.2"
+    },
+    "require": {
+        "api-platform/api-pack": "^1.4"
+    }
+}
