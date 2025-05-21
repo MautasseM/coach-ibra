@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" href="/logo.png">
+    {% block stylesheets %}
+      <link rel="stylesheet" href="{{ asset('build/index.css') }}">
+    {% endblock %}
+    {% block javascripts %}
+      {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+  </head>
+  <body class="min-h-screen bg-background text-foreground transition-colors duration-300 dark:bg-gray-950 dark:text-white">
+    <main>
+      {% block body %}{% endblock %}
+    </main>
+  </body>
+</html>

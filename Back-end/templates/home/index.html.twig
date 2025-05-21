@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<!-- Navbar -->
+<nav class="fixed w-full bg-white shadow-lg z-50 border-b border-gray-200">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="#" class="flex items-center">
+      <img src="/logo.png" alt="Coach Ibra Logo" class="h-12 w-12 rounded-full mr-2 object-cover" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=coach-ibra'" />
+      <span class="text-xl font-bold text-gray-900">Coach Ibra</span>
+    </a>
+    <div class="hidden md:flex items-center space-x-6">
+      <a href="#" class="text-gray-800 hover:text-blue-700 font-medium transition-colors">Accueil</a>
+      <a href="#services" class="text-gray-800 hover:text-blue-700 font-medium transition-colors">Services</a>
+      <a href="#schedule" class="text-gray-800 hover:text-blue-700 font-medium transition-colors">Planning</a>
+      <a href="#testimonials" class="text-gray-800 hover:text-blue-700 font-medium transition-colors">Témoignages</a>
+      <a href="#contact" class="text-gray-800 hover:text-blue-700 font-medium transition-colors">Contact</a>
+      <a href="/admin" class="text-gray-800 hover:text-blue-700 font-medium transition-colors">Admin</a>
+      <a href="{{ path('app_login') }}" class="ml-4 px-4 py-2 border border-blue-700 text-blue-700 font-semibold rounded hover:bg-blue-700 hover:text-white transition">Se connecter</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="relative flex items-center justify-center min-h-screen w-full bg-black" style="background-image: url('/images/hero-bg.jpg'); background-size: cover; background-position: center; padding-top: 80px;">
+  <div class="absolute inset-0 bg-black/60"></div>
+  <div class="relative z-10 flex flex-col items-center justify-center text-center text-white py-16 px-4 w-full" style="max-width: 600px; margin: 0 auto;">
+    <h1 class="mb-4 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight drop-shadow-lg">Coach Ibra Fitness</h1>
+    <p class="mb-8 text-lg md:text-xl lg:text-2xl font-medium italic drop-shadow-md">Votre transformation commence ici.</p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="#personal-training" class="px-6 py-3 bg-red-700 hover:bg-red-800 text-white font-semibold rounded-lg text-lg transition">Personal Training</a>
+      <a href="#group-classes" class="px-6 py-3 border border-white text-white bg-black/40 hover:bg-white/20 font-semibold rounded-lg text-lg transition">Group Classes</a>
+      <a href="#kids-program" class="px-6 py-3 border border-white text-white bg-black/40 hover:bg-white/20 font-semibold rounded-lg text-lg transition">Kids Program</a>
+    </div>
+  </div>
+  <div class="absolute bottom-0 left-0 h-2 w-full bg-gradient-to-r from-red-600 via-red-500 to-orange-500"></div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center text-blue-700">Nos Services</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-white rounded-lg shadow-md p-8 text-center">
+        <h3 class="text-xl font-semibold mb-2">Coaching Personnel</h3>
+        <p class="text-gray-500">Un accompagnement sur-mesure pour atteindre vos objectifs.</p>
+      </div>
+      <div class="bg-white rounded-lg shadow-md p-8 text-center">
+        <h3 class="text-xl font-semibold mb-2">Cours Collectifs</h3>
+        <p class="text-gray-500">Des séances dynamiques en groupe pour se motiver ensemble.</p>
+      </div>
+      <div class="bg-white rounded-lg shadow-md p-8 text-center">
+        <h3 class="text-xl font-semibold mb-2">Programme Enfants</h3>
+        <p class="text-gray-500">Des activités adaptées pour les plus jeunes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Planning Section -->
+<section id="schedule" class="py-16 bg-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center text-blue-700">Planning</h2>
+    <div class="bg-gray-50 rounded-lg shadow-md p-8">
+      <p class="text-center text-gray-500 mb-0">Consultez le planning des cours et réservez votre place.</p>
+      <!-- Placeholder for calendar or schedule table -->
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center text-blue-700">Témoignages</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
+      <div class="bg-white rounded-lg shadow-md p-8 text-center">
+        <blockquote class="italic text-gray-500 mb-4">"Coach Ibra m'a aidé à transformer ma vie!"</blockquote>
+        <span class="font-semibold text-blue-700">- Alice</span>
+      </div>
+      <div class="bg-white rounded-lg shadow-md p-8 text-center">
+        <blockquote class="italic text-gray-500 mb-4">"Des cours variés et une super ambiance."</blockquote>
+        <span class="font-semibold text-blue-700">- Karim</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-16 bg-white">
+  <div class="max-w-xl mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center text-blue-700">Contact</h2>
+    <form class="space-y-6">
+      <div>
+        <label for="name" class="block text-sm font-medium mb-1">Nom</label>
+        <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="Votre nom" required>
+      </div>
+      <div>
+        <label for="email" class="block text-sm font-medium mb-1">Email</label>
+        <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="Votre email" required>
+      </div>
+      <div>
+        <label for="message" class="block text-sm font-medium mb-1">Message</label>
+        <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="Votre message" required></textarea>
+      </div>
+      <button type="submit" class="w-full py-3 bg-blue-700 hover:bg-blue-800 text-white font-semibold rounded-lg transition">Envoyer</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-blue-900 text-white py-8 mt-10">
+  <div class="container mx-auto px-4 text-center">
+    <div class="mb-6 flex justify-center gap-8">
+      <a href="#" class="text-white hover:text-blue-400 transition-colors" aria-label="Facebook">
+        <svg class="inline" style="height: 1.5em; width: 1.5em;" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.47.69a4.3 4.3 0 0 0 1.88-2.37 8.59 8.59 0 0 1-2.72 1.04A4.28 4.28 0 0 0 16.11 4c-2.37 0-4.29 1.92-4.29 4.29 0 .34.04.67.11.99C7.69 8.99 4.07 7.13 1.64 4.15c-.37.64-.58 1.39-.58 2.19 0 1.51.77 2.84 1.95 3.62-.72-.02-1.39-.22-1.98-.55v.06c0 2.11 1.5 3.87 3.5 4.27-.36.1-.74.16-1.13.16-.28 0-.54-.03-.8-.08.54 1.68 2.11 2.9 3.97 2.93A8.6 8.6 0 0 1 2 19.54a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.38-.01-.57A8.7 8.7 0 0 0 24 4.59a8.48 8.48 0 0 1-2.54.7z"/></svg>
+      </a>
+      <a href="#" class="text-white hover:text-blue-400 transition-colors" aria-label="Twitter">
+        <svg class="inline" style="height: 1.5em; width: 1.5em;" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.04c-5.5 0-9.96 4.46-9.96 9.96 0 4.41 3.6 8.07 8.24 8.93.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.54-1.37-1.32-1.74-1.32-1.74-1.08-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.06 1.82 2.78 1.3 3.46.99.11-.77.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.97 0-1.32.47-2.39 1.23-3.23-.12-.3-.53-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.87.12 3.17.77.84 1.23 1.91 1.23 3.23 0 4.64-2.8 5.67-5.47 5.97.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.36 20.07 24 16.41 24 12c0-5.5-4.46-9.96-9.96-9.96z"/></svg>
+      </a>
+      <a href="#" class="text-white hover:text-blue-400 transition-colors" aria-label="Instagram">
+        <svg class="inline" style="height: 1.5em; width: 1.5em;" fill="currentColor" viewBox="0 0 24 24"><path d="M17.5 6.5A2.5 2.5 0 1 1 15 4a2.5 2.5 0 0 1 2.5 2.5zm-7.5 2A2.5 2.5 0 1 1 7.5 6a2.5 2.5 0 0 1 2.5 2.5zm7.5 7.5a2.5 2.5 0 1 1-2.5-2.5 2.5 2.5 0 0 1 2.5 2.5zm-7.5 2A2.5 2.5 0 1 1 7.5 14a2.5 2.5 0 0 1 2.5 2.5z"/></svg>
+      </a>
+    </div>
+    <div class="text-sm text-slate-300">&copy; {{ "now"|date("Y") }} Coach Ibra. Tous droits réservés.</div>
+  </div>
+</footer>
+{% endblock %}
